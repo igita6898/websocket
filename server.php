@@ -40,7 +40,7 @@ class WebSocket {
         }
 
         $this->sockets[0] = ['resource' => $this->master];
-        $pid = posix_getpid();
+        $pid = function_exists('posix_getpid') ? posix_getpid() : get_current_user();
         $this->debug(["server: {$this->master} started,pid: {$pid}"]);
 
         while (true) {
@@ -328,4 +328,4 @@ class WebSocket {
     }
 }
 
-$ws = new WebSocket("127.0.0.1", "8080");
+$ws = new WebSocket("0.0.0.0", "9080");
